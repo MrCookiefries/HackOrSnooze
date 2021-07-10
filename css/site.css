@@ -1,8 +1,14 @@
 /* General typography */
+html {
+  min-height: 100vh;
+}
 
 body {
   font-family: Arimo, sans-serif;
-  margin: 8px 7.5vw;
+  margin: 1em auto;
+  max-width: 1000px;
+  min-height: 100%;
+  border: solid 0.25em hsl(0, 0%, 10%);
 }
 
 h1 {
@@ -106,18 +112,18 @@ form > hr {
   width: 70px;
 }
 
-
-/* responsive queries for tightening things up for mobile. */
-
-@media screen and (max-width: 576px) {
-  body {
-    margin: 0;
-  }
+#add-story-form {
+  padding: 0.5em;
 }
 
-@media screen and (min-width: 992px) {
-  body {
-    max-width: 900px;
-    margin: 8px auto;
-  }
+#add-story-form input[type="submit"] {
+  border: 0.25em solid #ff6600;
+  font-size: 1.2em;
+  font-weight: 600;
+  transition: transform 400ms ease-in-out;
+}
+
+#add-story-form input[type="submit"]:hover {
+  cursor: pointer;
+  transform: scale(0.95);
 }

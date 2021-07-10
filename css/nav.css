@@ -4,12 +4,9 @@ nav {
   display: flex;
   background-color: #ff6600;
   align-items: center;
-  padding: 5px 20px;
-  border-radius: 3px 3px 0 0;
-}
-
-.navbar-brand {
-  font-weight: bold;
+  padding: 0.5em 0.25em;
+  font-size: 1.25em;
+  box-shadow: 0 0 2em 0.1em hsl(0, 0%, 10%);
 }
 
 .nav-link {
@@ -20,4 +17,9 @@ nav {
 .nav-right {
   margin-left: auto;
   text-align: right;
+}
+
+nav a {
+  text-transform: capitalize;
+  font-weight: 600;
 }

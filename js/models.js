@@ -73,8 +73,15 @@ class StoryList {
    * Returns the new Story instance
    */
 
-  async addStory( /* user, newStory */) {
-    // UNIMPLEMENTED: complete this function!
+  async addStory(user, {title, author, url}) {
+    const response = await axios.post(`${BASE_URL}/stories`, {
+      token: user.loginToken,
+      story: {title, author, url}
+    });
+    const newStory = new Story(response.data.story);
+    this.stories.push(newStory);
+    currentUser.ownStories.push(newStory);
+    return newStory;
   }
 }
 
@@ -107,6 +114,26 @@ class User {
 
     // store the login token on the user so it's easy to find for API calls.
     this.loginToken = token;
+  }
+
+  /** toggles a story as favorite */
+  async toggleFavoriteStory(story, add) {
+    const response = await axios({
+      url: `${BASE_URL}/users/${currentUser.username}/favorites/${story.storyId}`,
+      method: add ? "POST": "DELETE",
+      data: {token: currentUser.loginToken}
+    });
+  }
+
+  /** deletes a story */
+  async deleteStory() {
+    const $ele = $(this).parent();
+    const response = await axios({
+      url: `${BASE_URL}/stories/${$ele.attr("id")}`,
+      method: "DELETE",
+      data: {token: currentUser.loginToken}
+    });
+    $ele.remove();
   }
 
   /** Register new user in API, make User instance & return it.

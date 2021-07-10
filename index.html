@@ -9,7 +9,7 @@
      - Michael Hueter: initial creation, 2018
      - Elie Schoppik: refactoring using OO, 2019
      - Joel Burton: refactored and componentized, 2020
-     - You!
+     - Michael Copeland: completed project requirements, 2021
   -->
 
 <html lang="en">
@@ -24,10 +24,10 @@
       href="https://use.fontawesome.com/releases/v5.3.1/css/all.css"
       integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU"
       crossorigin="anonymous">
-  <link rel="stylesheet" href="css/site.css">
-  <link rel="stylesheet" href="css/user.css">
-  <link rel="stylesheet" href="css/stories.css">
-  <link rel="stylesheet" href="css/nav.css">
+  <link rel="stylesheet" href="./css/site.css">
+  <link rel="stylesheet" href="./css/user.css">
+  <link rel="stylesheet" href="./css/stories.css">
+  <link rel="stylesheet" href="./css/nav.css">
 </head>
 
 <body>
@@ -40,12 +40,37 @@
   <div class="nav-right">
     <a class="nav-link" href="#" id="nav-login">login/signup</a>
     <a class="nav-link" href="#" id="nav-user-profile"></a>
+    <a href="#" class="nav-link" id="nav-submit">submit</a>
     <a class="hidden" id="nav-logout" href="#"><small>(logout)</small></a>
   </div>
 </nav>
 
 <!-- area for stories (all stories, user stories, favorites) -->
 <section class="stories-container container">
+
+  <div id="user-account">
+    <p>Stories</p>
+    <div>
+      <button id="favorites-button" type="button">Favorites</button>
+      <button id="uploads-button" type="button">Your Uploads</button>
+    </div>
+  </div>
+
+  <form id="add-story-form" action="#" method="post">
+    <label for="new-story-title">
+      Title:
+      <input placeholder="Amazing Story" required type="text" id="new-story-title">
+    </label>
+    <label for="new-story-author">
+      Author:
+      <input placeholder="W. R. Iter" required type="text" id="new-story-author">
+    </label>
+    <label for="new-story-link">
+      Link:
+      <input placeholder="https://www.stories.com/amazing-story" required type="url" id="new-story-link">
+    </label>
+    <input type="submit" value="Add">
+  </form>
 
   <!-- loading message (removed by JS after stories loaded) -->
   <div id="stories-loading-msg">Loading&hellip;</div>
@@ -100,11 +125,11 @@
 <script src="https://unpkg.com/jquery"></script>
 <script src="https://unpkg.com/axios/dist/axios.js"></script>
 
-<script src="js/models.js"></script>
-<script src="js/main.js"></script>
-<script src="js/nav.js"></script>
-<script src="js/user.js"></script>
-<script src="js/stories.js"></script>
+<script src="./js/models.js"></script>
+<script src="./js/main.js"></script>
+<script src="./js/nav.js"></script>
+<script src="./js/user.js"></script>
+<script src="./js/stories.js"></script>
 
 </body>
 </html>
