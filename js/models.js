@@ -79,8 +79,8 @@ class StoryList {
       story: {title, author, url}
     });
     const newStory = new Story(response.data.story);
-    this.stories.push(newStory);
-    currentUser.ownStories.push(newStory);
+    this.stories.unshift(newStory);
+    currentUser.ownStories.unshift(newStory);
     return newStory;
   }
 }
@@ -123,6 +123,12 @@ class User {
       method: add ? "POST": "DELETE",
       data: {token: currentUser.loginToken}
     });
+    this.favorites = response.data.user.favorites.map(s => new Story(s));
+  }
+
+  /** checks if story is a user favorite */
+  checkUserFavorite(story) {
+    return this.favorites.some(s => s.storyId === story.storyId);
   }
 
   /** deletes a story */

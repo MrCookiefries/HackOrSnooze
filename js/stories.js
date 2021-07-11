@@ -6,6 +6,7 @@ let storyList;
 /** Get and show stories when site first loads. */
 
 async function getAndShowStoriesOnStart() {
+  console.debug("getAndShowStoriesOnStart");
   storyList = await StoryList.getStories();
   $storiesLoadingMsg.remove();
 
@@ -48,7 +49,7 @@ function putStoriesOnPage() {
   for (let story of storyList.stories) {
     const $story = generateStoryMarkup(story);
     if (currentUser) {
-      if (currentUser.favorites.some(f => f.storyId === story.storyId)) {
+      if (currentUser.checkUserFavorite(story)) {
         $story.find("span").addClass("true");
       }
     }
@@ -61,15 +62,17 @@ function putStoriesOnPage() {
 /** Takes form input values & creates a new story */
 async function createStory(evt) {
   evt.preventDefault();
-  console.debug("addNewStory", evt);
+  console.debug("createStory", evt);
   const title = $addStoryForm.find("#new-story-title").val();
   const author = $addStoryForm.find("#new-story-author").val();
   const url = $addStoryForm.find("#new-story-link").val();
   const story = await storyList.addStory(currentUser, {title, author, url});
   const $story = generateStoryMarkup(story);
-  $allStoriesList.append($story);
+  $allStoriesList.prepend($story);
   $addStoryForm.hide();
-  $allStoriesList.show();
+  hidePageComponents();
+  putStoriesOnPage();
+  $addStoryForm.get(0).reset();
 }
 
 $addStoryForm.on("submit", createStory);
